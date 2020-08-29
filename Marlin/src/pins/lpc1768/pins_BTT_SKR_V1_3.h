@@ -300,6 +300,14 @@
   #define SS_PIN           P0_16
 #endif
 
+//
+// PSU
+//
+#ifndef PS_ON_PIN
+  #define PS_ON_PIN      P2_00
+#endif
+
+
 /**
  * Special pins
  *   P1_30  (37) (NOT 5V tolerant)

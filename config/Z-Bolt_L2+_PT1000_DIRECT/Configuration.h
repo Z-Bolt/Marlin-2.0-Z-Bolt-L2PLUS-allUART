@@ -321,7 +321,7 @@
  * Enable and connect the power supply to the PS_ON_PIN.
  * Specify whether the power supply is active HIGH or active LOW.
  */
-#define PSU_CONTROL
+//#define PSU_CONTROL
 //#define PSU_NAME "Power Supply"
 
 #if ENABLED(PSU_CONTROL)
@@ -708,7 +708,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 150 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 405 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1043,12 +1043,12 @@
 
 // The size of the print bed
 #define X_BED_SIZE 300
-#define Y_BED_SIZE 203
+#define Y_BED_SIZE 200
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
-#define Z_MIN_POS -3
+#define Z_MIN_POS -5
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 340

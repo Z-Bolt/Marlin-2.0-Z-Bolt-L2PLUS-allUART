@@ -571,7 +571,7 @@
 // Homing hits each endstop, retracts by these distances, then does a slower bump.
 #define X_HOME_BUMP_MM 5
 #define Y_HOME_BUMP_MM 5
-#define Z_HOME_BUMP_MM 2
+#define Z_HOME_BUMP_MM 6
 #define HOMING_BUMP_DIVISOR { 2, 2, 4 }  // Re-Bump Speed Divisor (Divides the Homing Feedrate)
 //#define QUICK_HOME                     // If homing includes X and Y, do a diagonal move initially
 //#define HOMING_BACKOFF_MM { 2, 2, 2 }  // (mm) Move away from the endstops after homing
@@ -702,10 +702,10 @@
 // Default stepper release if idle. Set to 0 to deactivate.
 // Steppers will shut down DEFAULT_STEPPER_DEACTIVE_TIME seconds after the last move when DISABLE_INACTIVE_? is true.
 // Time can be set by M18 and M84.
-#define DEFAULT_STEPPER_DEACTIVE_TIME 120
+#define DEFAULT_STEPPER_DEACTIVE_TIME 600
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
-#define DISABLE_INACTIVE_Z true  // Set to false if the nozzle will fall down on your printed part when print has finished.
+#define DISABLE_INACTIVE_Z false  // Set to false if the nozzle will fall down on your printed part when print has finished.
 #define DISABLE_INACTIVE_E true
 
 #define DEFAULT_MINIMUMFEEDRATE       0.0     // minimum feedrate
@@ -745,7 +745,7 @@
   //#define BACKLASH_SMOOTHING_MM 3 // (mm)
 
   // Add runtime configuration and tuning of backlash values (M425)
-  //#define BACKLASH_GCODE
+  #define BACKLASH_GCODE
 
   #if ENABLED(BACKLASH_GCODE)
     // Measure the Z backlash when probing (G29) and set with "M425 Z"
@@ -821,7 +821,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-//#define ADAPTIVE_STEP_SMOOTHING
+#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
@@ -1366,7 +1366,7 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
@@ -1412,10 +1412,10 @@
  * See http://marlinfw.org/docs/features/lin_advance.html for full instructions.
  * Mention @Sebastianv650 on GitHub to alert the author of any issues.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
-  #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
+  #define LIN_ADVANCE_K 0.00    // Unit: mm compression per 1mm/s extruder speed
   //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
 #endif
 
@@ -1529,8 +1529,8 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_POST_DIR_DELAY 650
-//#define MINIMUM_STEPPER_PRE_DIR_DELAY 650
+#define MINIMUM_STEPPER_POST_DIR_DELAY 20
+#define MINIMUM_STEPPER_PRE_DIR_DELAY 20
 
 /**
  * Minimum stepper driver pulse width (in µs)
@@ -1543,7 +1543,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MINIMUM_STEPPER_PULSE 2
+#define MINIMUM_STEPPER_PULSE 0
 
 /**
  * Maximum stepping rate (in Hz) the stepper driver allows
@@ -1557,7 +1557,7 @@
  *
  * Override the default value based on the driver type set in Configuration.h.
  */
-//#define MAXIMUM_STEPPER_RATE 250000
+#define MAXIMUM_STEPPER_RATE 400000
 
 // @section temperature
 
@@ -1876,11 +1876,11 @@
  */
 #if HAS_TRINAMIC
 
-  #define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
+  #define HOLD_MULTIPLIER    0.75  // Scales down the holding current from run current
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X)
-    #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT       760        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16    // 0..256
     #define X_RSENSE          0.11
@@ -1896,7 +1896,7 @@
   #endif
 
   #if AXIS_IS_TMC(Y)
-    #define Y_CURRENT       800
+    #define Y_CURRENT       760
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -1912,7 +1912,7 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT       800
+    #define Z_CURRENT       760
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -1936,7 +1936,7 @@
   #endif
 
   #if AXIS_IS_TMC(E0)
-    #define E0_CURRENT      800
+    #define E0_CURRENT      560
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
@@ -2045,8 +2045,8 @@
    * When disabled, Marlin will use spreadCycle stepping mode.
    */
   #define STEALTHCHOP_XY
-  #define STEALTHCHOP_Z
-  #define STEALTHCHOP_E
+  //#define STEALTHCHOP_Z
+  //#define STEALTHCHOP_E
 
   /**
    * Optimize spreadCycle chopper parameters by using predefined parameter sets
@@ -2075,7 +2075,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+#define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -2092,14 +2092,14 @@
    */
   //#define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     100  // [mm/s]
+  #define X_HYBRID_THRESHOLD     300  // [mm/s]
   #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     100
+  #define Y_HYBRID_THRESHOLD     300
   #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD       3
+  #define Z_HYBRID_THRESHOLD      40
   #define Z2_HYBRID_THRESHOLD      3
   #define Z3_HYBRID_THRESHOLD      3
-  #define E0_HYBRID_THRESHOLD     30
+  #define E0_HYBRID_THRESHOLD    105
   #define E1_HYBRID_THRESHOLD     30
   #define E2_HYBRID_THRESHOLD     30
   #define E3_HYBRID_THRESHOLD     30
@@ -2162,7 +2162,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continous reporting.
    */
-  //#define TMC_DEBUG
+  #define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
