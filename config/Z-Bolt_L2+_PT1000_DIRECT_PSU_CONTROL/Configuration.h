@@ -475,9 +475,12 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
+//PT1000
 #define  DEFAULT_Kp 23.63
 #define  DEFAULT_Ki 3.15
 #define  DEFAULT_Kd 44.32
+
+//100k
 //#define DEFAULT_Kp 20.03
 //#define DEFAULT_Ki 1.87
 //#define DEFAULT_Kd 53.74
