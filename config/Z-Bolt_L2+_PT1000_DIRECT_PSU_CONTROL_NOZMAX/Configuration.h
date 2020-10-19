@@ -1040,7 +1040,7 @@
 // :[-1,1]
 #define X_HOME_DIR -1
 #define Y_HOME_DIR 1
-#define Z_HOME_DIR 1
+#define Z_HOME_DIR -1
 
 // @section machine
 
@@ -1051,7 +1051,7 @@
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
-#define Z_MIN_POS -5
+#define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 340
@@ -1165,7 +1165,7 @@
  * Normally G28 leaves leveling disabled on completion. Enable
  * this option to have G28 restore the prior leveling state.
  */
-#define RESTORE_LEVELING_AFTER_G28
+//#define RESTORE_LEVELING_AFTER_G28
 
 /**
  * Enable detailed logging of G28, G29, M48, etc.
