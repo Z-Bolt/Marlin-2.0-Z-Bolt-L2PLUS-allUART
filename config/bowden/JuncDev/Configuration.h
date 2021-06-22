@@ -476,9 +476,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
 //PT1000
-#define  DEFAULT_Kp 11.4
-#define  DEFAULT_Ki 0.7
-#define  DEFAULT_Kd 46.1
+#define  DEFAULT_Kp 23.63
+#define  DEFAULT_Ki 3.15
+#define  DEFAULT_Kd 44.32
 
 //100k
 //#define DEFAULT_Kp 20.03
@@ -758,10 +758,10 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define CLASSIC_JERK
+//#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
-  #define DEFAULT_XJERK 15.0
-  #define DEFAULT_YJERK 15.0
+  #define DEFAULT_XJERK 10.0
+  #define DEFAULT_YJERK 10.0
   #define DEFAULT_ZJERK  0.4
 
   //#define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
